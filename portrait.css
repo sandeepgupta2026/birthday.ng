@@ -1,0 +1,246 @@
+/* ================= PAGE-PORTRAIT ================= */
+.page-portrait * {
+margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+.page-portrait {
+/* background:#111; */
+  background:linear-gradient(135deg,#7064fa, #cd4ae4);
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.page-portrait .container {
+width:100%;
+
+    max-width:1300px;
+
+    min-height:100vh;
+
+    padding:40px;
+
+    position:relative;
+}
+
+/* =========================
+        TITLE
+========================= */
+
+.page-portrait h1 {
+margin-top:80px;
+
+    text-align:center;
+
+    font-size:70px;
+
+    color:rgb(142, 26, 150,0.6);
+
+    font-family:"Great Vibes",cursive;
+
+    letter-spacing:2px;
+}
+
+/* =========================
+        MAIN
+========================= */
+
+.page-portrait .content {
+margin-top:50px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:80px;
+}
+
+/* =========================
+        PHOTO
+========================= */
+
+.page-portrait .photoBox {
+width:420px;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.page-portrait .polaroid {
+width:330px;
+
+    background:rgb(184, 98, 194,0.6);
+
+    padding:18px 18px 60px;
+
+    transform:rotate(-8deg);
+
+    box-shadow:
+
+    0 18px 40px rgba(224, 12, 12, 0.5);
+
+    transition:.8s;
+}
+
+.page-portrait .polaroid img {
+width:100%;
+
+    height:430px;
+
+    object-fit:cover;
+}
+
+/* =========================
+        MESSAGE
+========================= */
+
+.page-portrait .messageBox {
+width:350px;
+
+    color:rgb(138, 105, 105);
+}
+
+.page-portrait .messageBox h2 {
+font-size:40px;
+
+    margin-bottom:20px;
+
+    color:#dfa4a4;
+}
+
+.page-portrait .messageBox p {
+line-height:2;
+
+    font-size:20px;
+
+    color:#eebaba;
+}
+
+/* =========================
+        NEXT BUTTON
+========================= */
+
+.page-portrait #nextBtn {
+width:65px;
+
+    height:65px;
+
+    border:none;
+
+    border-radius:50%;
+
+    margin-top:35px;
+
+    background:#c87388;
+
+    color:rgb(243, 231, 231);
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.page-portrait #nextBtn:hover {
+transform:scale(1.1);
+
+    background:#fa6087;
+}
+
+/* =========================
+        ANIMATION
+========================= */
+
+
+/* =========================
+        MOBILE
+========================= */
+
+@media(max-width:768px) {
+.page-portrait .container {
+padding:20px;
+}
+
+.page-portrait h1 {
+font-size:45px;
+
+margin-top:60px;
+}
+
+.page-portrait .content {
+flex-direction:column;
+
+gap:35px;
+}
+
+.page-portrait .photoBox {
+width:100%;
+}
+
+.page-portrait .polaroid {
+width:260px;
+}
+
+.page-portrait .polaroid img {
+height:330px;
+}
+
+.page-portrait .messageBox {
+width:100%;
+
+text-align:center;
+}
+
+.page-portrait .messageBox h2 {
+font-size:30px;
+}
+
+.page-portrait .messageBox p {
+font-size:17px;
+}
+
+}
+
+.page-portrait #photo,
+.page-portrait #title,
+.page-portrait #message {
+transition:.6s ease;
+}
+
+@keyframes heart {
+0%{
+
+transform:translateY(0) rotate(0deg);
+
+opacity:0;
+
+}
+
+15%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) rotate(360deg);
+
+opacity:0;
+
+}
+}

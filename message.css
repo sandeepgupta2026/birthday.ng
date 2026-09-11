@@ -1,0 +1,942 @@
+/* ================= PAGE-MESSAGE ================= */
+/* ==========================
+   RESET
+========================== */
+
+.page-message * {
+margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.page-message {
+font-family:"Poppins",sans-serif;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    /* background:#f89fbf; */
+     background: linear-gradient(
+        135deg,
+        
+    #782c83,
+    #ac313f
+    
+        
+    );
+
+    position:relative;
+}
+
+
+/* #d8c3a5 */
+/* ==========================
+   PAPER TEXTURE
+========================== */
+
+.page-message::before {
+content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background-image:
+
+    radial-gradient(rgba(44, 180, 37, 0.18) 1px, transparent 1px),
+
+    radial-gradient(rgba(40, 94, 171, 0.04) 1px, transparent 1px);
+
+    background-size:22px 22px,30px 30px;
+
+    opacity:.7;
+
+    pointer-events:none;
+}
+
+/* ==========================
+   TORN PAPER
+========================== */
+
+/* .page-message::after {
+content:"";
+
+    position:fixed;
+
+    left:0;
+
+    bottom:0;
+
+    width:100%;
+
+    height:120px;
+
+    background:
+    radial-gradient(circle at 20px 0,#9a46b8 25px,transparent 26px),
+    radial-gradient(circle at 70px 0,#c6d8a5 28px,transparent 29px),
+    radial-gradient(circle at 120px 0,#a5d8a8 25px,transparent 26px);
+
+    background-size:150px 100%;
+
+    opacity:.45;
+} */
+
+/* ==========================
+   MAIN
+========================== */
+
+.page-message .scrapbook {
+width:100%;
+
+    max-width:1300px;
+
+    margin:auto;
+
+    padding:60px 20px;
+}
+
+/* ==========================
+   TITLE
+========================== */
+
+.page-message .scrapbook h1 {
+text-align:center;
+
+    font-size:72px;
+
+    font-family:"Caveat",cursive;
+
+    color:#3d022c;
+    
+
+    letter-spacing:2px;
+}
+
+.page-message .subtitle {
+text-align:center;
+
+    margin-top:10px;
+
+    color:#1f020b;
+
+    font-size:22px;
+
+    margin-bottom:50px;
+}
+
+/* ==========================
+   SCRAPBOOK BOARD
+========================== */
+
+.page-message .board {
+position:relative;
+
+    width:100%;
+
+    height:900px;
+
+    background:#bf598e05;
+
+    border-radius:25px;
+
+    box-shadow:
+
+    0 20px 60px rgba(0,0,0,.25),
+
+    inset 0 0 25px rgba(255,255,255,.5);
+
+    overflow:hidden;
+}
+
+/* ==========================
+   PAPER SHADOW
+========================== */
+
+.page-message .board::before {
+content:"";
+
+    position:absolute;
+
+    inset:18px;
+
+    border:2px dashed rgba(0,0,0,.08);
+
+    border-radius:20px;
+}
+
+.page-message .board::after {
+content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+
+    rgba(255,255,255,.15),
+
+    transparent 35%,
+
+    rgba(0,0,0,.05)
+
+    );
+}
+
+/* ==========================
+   LETTER
+========================== */
+
+.page-message .letter {
+width:90%;
+
+    max-width:700px;
+
+    margin:60px auto;
+
+    background:#e8abac05;
+
+    padding:40px;
+
+    border-radius:18px;
+
+    box-shadow:0 15px 40px rgba(22, 2, 2, 0.25);
+}
+
+.page-message .letter h2 {
+text-align:center;
+
+    font-size:40px;
+
+    color:rgb(56, 23, 17);
+
+    font-family:"Caveat",cursive;
+}
+
+.page-message .letter p {
+margin-top:20px;
+
+    text-align:center;
+
+    line-height:2;
+
+    color:#1f0202;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.page-message #nextBtn {
+display:block;
+
+    margin:40px auto;
+
+    padding:18px 45px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#7f204840;
+
+    color:rgb(50, 47, 47);
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+/* #nextBtn{
+
+    margin-top:40px;
+
+    padding:16px 45px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:#ff6b81;
+
+    color:#fff;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+} */
+
+.page-message #nextBtn:hover {
+transform:scale(1.05);
+    background: #2e010b;
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px) {
+.page-message .scrapbook {
+padding:25px 15px;
+}
+
+.page-message .scrapbook h1 {
+font-size:46px;
+
+color:rgb(217, 52, 23,);
+}
+
+.page-message .subtitle {
+font-size:17px;
+}
+
+.page-message .board {
+height:auto;
+
+min-height:900px;
+}
+
+.page-message .letter {
+padding:25px;
+}
+}
+
+/* ===================================
+        PHOTO CARDS
+=================================== */
+
+.page-message .message1 {
+font-size: 14px;
+     color: rgb(237, 103, 125);
+}
+
+.page-message .message2 {
+font-size: 14px;
+     color: rgb(84, 188, 72);
+}
+
+.page-message .message3 {
+font-size: 14px;
+     color: rgb(119, 142, 148);
+}
+
+.page-message .message4 {
+font-size: 14px;
+     color: rgb(147, 8, 71);
+}
+
+.page-message .message5 {
+font-size: 14px;
+     color: rgb(217, 52, 23);
+}
+
+/* 240, */
+
+.page-message .card {
+position:absolute;
+    width:260px;
+    background:#fff;
+    padding:11px 11px 5px;
+    border-radius:4px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.25);
+
+    transition:.4s ease;
+
+    cursor:pointer;
+}
+
+.page-message .card img {
+width:100%;
+    height:280px;
+    object-fit:cover;
+    display:block;
+}
+
+.page-message .card:hover {
+transform:scale(1.05) rotate(0deg);
+    z-index:999;
+}
+
+/* ===================================
+            PHOTO POSITIONS
+=================================== */
+
+.page-message .card1 {
+top:40px;
+    left:70px;
+    transform:rotate(-8deg);
+}
+
+.page-message .card2 {
+top:70px;
+    right:90px;
+    transform:rotate(8deg);
+}
+
+.page-message .card3 {
+bottom:70px;
+    left:90px;
+    transform:rotate(-10deg);
+}
+
+.page-message .card4 {
+bottom:80px;
+    right:70px;
+    transform:rotate(10deg);
+}
+
+.page-message .center {
+width:300px;
+
+    left:50%;
+    top:230px;
+
+    transform:translateX(-50%) rotate(-2deg);
+}
+
+.page-message .center img {
+height:360px;
+}
+
+/* ===================================
+        ULTRA SMOOTH CARD FLOAT
+   Original positions + rotations unchanged
+=================================== */
+
+.page-message .card1,
+.page-message .card2,
+.page-message .card3,
+.page-message .card4,
+.page-message .center {
+    will-change: transform;
+}
+
+.page-message .card1 {
+    animation: messageFloat1 13s cubic-bezier(.37, 0, .63, 1) infinite;
+}
+
+.page-message .card2 {
+    animation: messageFloat2 14.5s cubic-bezier(.37, 0, .63, 1) infinite;
+    animation-delay: -2s;
+}
+
+.page-message .card3 {
+    animation: messageFloat3 12.5s cubic-bezier(.37, 0, .63, 1) infinite;
+    animation-delay: -4.2s;
+}
+
+.page-message .card4 {
+    animation: messageFloat4 15s cubic-bezier(.37, 0, .63, 1) infinite;
+    animation-delay: -6.5s;
+}
+
+.page-message .center {
+    animation: messageFloatCenter 14s cubic-bezier(.37, 0, .63, 1) infinite;
+    animation-delay: -3s;
+}
+
+@keyframes messageFloat1 {
+    0%, 100% { transform: rotate(-8deg) translate3d(0, 0, 0); }
+    50%      { transform: rotate(-8deg) translate3d(0, -8px, 0); }
+}
+
+@keyframes messageFloat2 {
+    0%, 100% { transform: rotate(8deg) translate3d(0, 0, 0); }
+    50%      { transform: rotate(8deg) translate3d(0, -9px, 0); }
+}
+
+@keyframes messageFloat3 {
+    0%, 100% { transform: rotate(-10deg) translate3d(0, 0, 0); }
+    50%      { transform: rotate(-10deg) translate3d(0, -7px, 0); }
+}
+
+@keyframes messageFloat4 {
+    0%, 100% { transform: rotate(10deg) translate3d(0, 0, 0); }
+    50%      { transform: rotate(10deg) translate3d(0, -8px, 0); }
+}
+
+@keyframes messageFloatCenter {
+    0%, 100% {
+        transform: translateX(-50%) rotate(-2deg) translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translateX(-50%) rotate(-2deg) translate3d(0, -10px, 0);
+    }
+}
+
+/* Smooth hover without disturbing the original design */
+.page-message .card:hover {
+    animation-play-state: paused;
+}
+
+/* Mobile: even softer movement */
+@media(max-width:768px) {
+    .page-message .card1,
+    .page-message .card2,
+    .page-message .card3,
+    .page-message .card4,
+    .page-message .center {
+        animation: messageFloatMobile 9s cubic-bezier(.37, 0, .63, 1) infinite;
+    }
+}
+
+@keyframes messageFloatMobile {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50%      { transform: translate3d(0, -6px, 0); }
+}
+
+/* ===================================
+             TRANSPARENT TAPE
+=================================== */
+
+.page-message .tape {
+position:absolute;
+
+    width:90px;
+    height:28px;
+
+    background:rgba(255,255,230,.65);
+
+    left:50%;
+    top:-14px;
+
+    transform:translateX(-50%) rotate(-6deg);
+
+    border-radius:4px;
+
+    box-shadow:
+    0 2px 4px rgba(0,0,0,.15);
+}
+
+.page-message .tape::before {
+content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,.25),
+        rgba(255,255,255,.25) 2px,
+        transparent 2px,
+        transparent 5px
+    );
+}
+
+/* ===================================
+      EXTRA SMALL TAPE
+=================================== */
+
+.page-message .card::after {
+content:"";
+
+    position:absolute;
+
+    width:45px;
+    height:18px;
+
+    right:12px;
+    bottom:15px;
+
+    background:rgba(255,255,220,.35);
+
+    transform:rotate(18deg);
+}
+
+/* ===================================
+         PHOTO SHADOW
+=================================== */
+
+.page-message .card::before {
+content:"";
+
+    position:absolute;
+
+    left:8px;
+    right:8px;
+    bottom:8px;
+
+    height:12px;
+
+    background:rgba(0,0,0,.12);
+
+    filter:blur(8px);
+
+    z-index:-1;
+}
+
+/* ===================================
+        MOBILE
+=================================== */
+
+@media(max-width:768px) {
+.page-message .board {
+display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:25px;
+
+    padding:25px;
+
+    height:auto;
+}
+
+.page-message .card {
+position:relative;
+
+    width:90%;
+
+    top:auto;
+    left:auto;
+    right:auto;
+    bottom:auto;
+
+    transform:rotate(0deg);
+}
+
+.page-message .center {
+width:95%;
+
+    transform:none;
+}
+
+.page-message .center img {
+height:320px;
+}
+}
+
+/* Mobile: keep the original stacked layout,
+   only add a tiny smooth float. */
+@media(max-width:768px) {
+    .page-message .card,
+    .page-message .card1,
+    .page-message .card2,
+    .page-message .card3,
+    .page-message .card4,
+    .page-message .center {
+        animation: messageFloatMobile 8.5s cubic-bezier(.45,0,.55,1) infinite;
+        will-change: transform;
+    }
+
+    .page-message .card2 { animation-delay: .5s; }
+    .page-message .card3 { animation-delay: 1s; }
+    .page-message .card4 { animation-delay: 1.5s; }
+    .page-message .center { animation-delay: .8s; }
+
+    .page-message .card:hover {
+        animation-play-state: paused;
+        transform: scale(1.05) rotate(0deg);
+    }
+}
+
+@keyframes messageFloatMobile {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -5px, 0); }
+}
+
+/*========================================
+        DECORATIONS
+========================================*/
+
+.page-message .flower {
+position:absolute;
+    font-size:42px;
+    animation:floatFlower 5s ease-in-out infinite;
+    z-index:20;
+}
+
+.page-message .flower1 {
+top:35px;
+    left:25px;
+    transform:rotate(-15deg);
+}
+
+.page-message .flower2 {
+top:120px;
+    right:35px;
+    transform:rotate(15deg);
+}
+
+.page-message .flower3 {
+bottom:60px;
+    left:180px;
+    transform:rotate(-20deg);
+}
+
+.page-message .flower4 {
+bottom:90px;
+    right:180px;
+    transform:rotate(18deg);
+}
+
+/*========================================
+        LEAVES
+========================================*/
+
+.page-message .leaf {
+position:absolute;
+    font-size:32px;
+    animation:leafMove 4s ease-in-out infinite;
+}
+
+.page-message .leaf1 {
+top:260px;
+    left:15px;
+}
+
+.page-message .leaf2 {
+top:450px;
+    right:15px;
+}
+
+.page-message .leaf3 {
+bottom:120px;
+    left:50%;
+}
+
+/*========================================
+        STARS
+========================================*/
+
+.page-message .star {
+position:absolute;
+
+    color:#f6c343;
+
+    font-size:18px;
+
+    animation:twinkle 2s infinite;
+}
+
+.page-message .star1 {
+top:70px;left:45%;
+}
+
+.page-message .star2 {
+top:180px;left:75%;
+}
+
+.page-message .star3 {
+top:420px;left:18%;
+}
+
+.page-message .star4 {
+bottom:170px;right:20%;
+}
+
+/*========================================
+        DUST
+========================================*/
+
+.page-message .board::after {
+content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+
+    radial-gradient(#ffffff80 1px,transparent 1px);
+
+    background-size:28px 28px;
+
+    opacity:.35;
+
+    pointer-events:none;
+}
+
+/*========================================
+      POLAROID PIN
+========================================*/
+
+.page-message .card::before {
+content:"📌";
+
+    position:absolute;
+
+    top:-24px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:24px;
+}
+
+/*========================================
+        CARD SHINE
+========================================*/
+
+.page-message .card {
+overflow:hidden;
+}
+
+.page-message .card::after {
+content:"";
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-60%;
+
+    width:50%;
+
+    height:260%;
+
+    background:rgba(255,255,255,.28);
+
+    transform:rotate(25deg);
+
+    transition:.8s;
+}
+
+.page-message .card:hover::after {
+left:140%;
+}
+
+/*========================================
+        LETTER
+========================================*/
+
+.page-message .letter {
+position:relative;
+}
+
+.page-message .letter::before {
+content:"💖";
+
+    position:absolute;
+
+    top:-18px;
+
+    left:20px;
+
+    font-size:28px;
+}
+
+.page-message .letter::after {
+content:"✨";
+
+    position:absolute;
+
+    right:20px;
+
+    bottom:-10px;
+
+    font-size:24px;
+}
+
+/*========================================
+        ANIMATION
+========================================*/
+
+@keyframes floatFlower {
+0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+}
+
+@keyframes leafMove {
+0%,100%{
+
+        transform:rotate(-8deg);
+
+    }
+
+    50%{
+
+        transform:rotate(8deg);
+
+    }
+}
+
+@keyframes twinkle {
+0%,100%{
+
+        opacity:.3;
+        transform:scale(.8);
+
+    }
+
+    50%{
+
+        opacity:1;
+        transform:scale(1.3);
+
+    }
+}
+
+/*========================================
+        MOBILE
+========================================*/
+
+@media(max-width:768px) {
+.page-message .flower {
+font-size:30px;
+}
+
+.page-message .star {
+display:none;
+}
+
+.page-message .leaf {
+display:none;
+}
+}
+
+.page-message .hearts {
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:999;
+}
+
+@keyframes heartFloat {
+0%{
+
+transform:translateY(0) rotate(0deg);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) rotate(360deg);
+
+opacity:0;
+
+}
+}

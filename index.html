@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05000b">
+<title>Birthday Surprise ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<!--
+    Smooth SPA-style page shell
+    ---------------------------
+    The pages remain in the same browser tab. Two iframe buffers are kept,
+    but the IMPORTANT difference is that the next page is loaded BEFORE the
+    visitor clicks Next. This removes the click -> network load -> blank gap.
+-->
+<div id="pageShell" aria-live="polite">
+    <iframe id="birthdayFrameA" class="birthdayFrame active" title="Birthday Surprise"></iframe>
+    <iframe id="birthdayFrameB" class="birthdayFrame" title="Birthday Surprise"></iframe>
+
+    <div id="pageLoader" aria-hidden="true">
+        <span></span>
+    </div>
+</div>
+
+<audio id="bgMusic" preload="auto">
+    <source src="bg1.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" aria-label="Music">🔊</button>
+
+<script>
+(() => {
+    "use strict";
+
+    const frames = [
+        document.getElementById("birthdayFrameA"),
+        document.getElementById("birthdayFrameB")
+    ];
+
+    const loader = document.getElementById("pageLoader");
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+
+    const pages = [
+        "welcome.html",
+        "message.html",
+        "gallery.html",
+        "portrait.html",
+        "page5.html",
+        "page6.html"
+    ];
+
+    const playlist = ["bg1.mp3", "bg.mp3"];
+
+    let current = 1;
+    let activeFrame = 0;
+    let navigationToken = 0;
+    let trackIndex = 0;
+    let firstLoad = true;
+    let preparedPage = 0;
+    const preparedFrames = new Map();
+
+    /* =====================================================
+       MUSIC
+    ===================================================== */
+    function startMusic() {
+        music.volume = 0.4;
+        return music.play().then(() => {
+            musicBtn.textContent = "🔊";
+        }).catch(() => {});
+    }
+
+    // Final page: switch to the dedicated birthday track (bg.mp3).
+    function playBirthdayMusic() {
+        trackIndex = 1;
+        if (!music.src.endsWith("bg.mp3")) {
+            music.src = "bg.mp3";
+        }
+        music.volume = 0.42;
+        return music.play().then(() => {
+            musicBtn.textContent = "🔊";
+        }).catch(() => {});
+    }
+
+    music.addEventListener("ended", () => {
+        // bg1.mp3 plays only once. After that, bg.mp3 repeats forever.
+        if (trackIndex === 0) {
+            trackIndex = 1;
+            music.src = "bg.mp3";
+            startMusic();
+        } else {
+            trackIndex = 1;
+            music.src = "bg.mp3";
+            startMusic();
+        }
+    });
+
+    musicBtn.addEventListener("click", () => {
+        if (music.paused) {
+            startMusic();
+        } else {
+            music.pause();
+            musicBtn.textContent = "🔇";
+        }
+    });
+
+    /* =====================================================
+       RESOURCE PRELOADER
+       -----------------------------------------------------
+       Fetching only the HTML was not enough: images/fonts/CSS still had
+       to download when the iframe became visible. We now discover the
+       page's images, stylesheets, scripts and audio and warm them early.
+    ===================================================== */
+    const warmedPages = new Set();
+
+    function absoluteUrl(url) {
+        try {
+            return new URL(url, location.href).href;
+        } catch {
+            return null;
+        }
+    }
+
+    async function warmPageAssets(pageNumber) {
+        if (!pages[pageNumber - 1] || warmedPages.has(pageNumber)) return;
+        warmedPages.add(pageNumber);
+
+        const pageUrl = pages[pageNumber - 1];
+
+        try {
+            const response = await fetch(pageUrl, {
+                cache: "force-cache",
+                credentials: "same-origin"
+            });
+
+            if (!response.ok) return;
+
+            const html = await response.text();
+            const doc = new DOMParser().parseFromString(html, "text/html");
+
+            const resources = new Set();
+
+            doc.querySelectorAll("img[src]").forEach(el => resources.add(el.getAttribute("src")));
+            doc.querySelectorAll("link[rel='stylesheet'][href]").forEach(el => resources.add(el.getAttribute("href")));
+            doc.querySelectorAll("script[src]").forEach(el => resources.add(el.getAttribute("src")));
+            doc.querySelectorAll("audio source[src], audio[src]").forEach(el => resources.add(el.getAttribute("src")));
+
+            resources.forEach(resource => {
+                const url = absoluteUrl(new URL(resource, new URL(pageUrl, location.href)).href);
+                if (!url) return;
+
+                if (/\.(jpe?g|png|webp|gif|avif|svg)(\?|$)/i.test(url)) {
+                    const img = new Image();
+                    img.decoding = "async";
+                    img.src = url;
+                } else {
+                    fetch(url, {
+                        cache: "force-cache",
+                        credentials: "same-origin"
+                    }).catch(() => {});
+                }
+            });
+        } catch {
+            // The iframe itself will still load the page if preloading fails.
+        }
+    }
+
+    /* =====================================================
+       IFRAME PREPARATION
+       -----------------------------------------------------
+       One frame is visible; the other is silently prepared for the NEXT
+       page. Therefore clicking Next normally only changes opacity/transform.
+    ===================================================== */
+    function prepareFrameFor(pageNumber, frameIndex) {
+        if (!pages[pageNumber - 1]) return Promise.resolve(false);
+
+        const frame = frames[frameIndex];
+
+        if (preparedFrames.get(frameIndex) === pageNumber && frame.src.includes(pages[pageNumber - 1])) {
+            return Promise.resolve(true);
+        }
+
+        return new Promise(resolve => {
+            let settled = false;
+            const finish = ok => {
+                if (settled) return;
+                settled = true;
+                frame.removeEventListener("load", onload);
+                frame.removeEventListener("error", onerror);
+                preparedFrames.set(frameIndex, ok ? pageNumber : 0);
+                resolve(ok);
+            };
+
+            const onload = () => finish(true);
+            const onerror = () => finish(false);
+
+            frame.addEventListener("load", onload, { once: true });
+            frame.addEventListener("error", onerror, { once: true });
+
+            frame.classList.remove("active", "loading");
+            frame.style.transform = "translate3d(0, 12px, 0) scale(.998)";
+            frame.src = pages[pageNumber - 1];
+        });
+    }
+
+    async function prepareNext(pageNumber) {
+        if (pageNumber < 1 || pageNumber > pages.length) return;
+
+        const inactiveFrame = activeFrame === 0 ? 1 : 0;
+        await warmPageAssets(pageNumber);
+        await prepareFrameFor(pageNumber, inactiveFrame);
+        preparedPage = pageNumber;
+    }
+
+    /* =====================================================
+       PROJECT 1 STYLE — SMOOTH CINEMATIC SLIDE
+    ===================================================== */
+    let navigationLocked = false;
+
+    async function go(page, push = true) {
+        page = Number(page);
+        if (!Number.isInteger(page) || page < 1 || page > pages.length) return;
+        if (page === current && !firstLoad) return;
+        if (navigationLocked) return;
+
+        navigationLocked = true;
+        const token = ++navigationToken;
+        const direction = page > current ? 1 : -1;
+        const nextFrameIndex = activeFrame === 0 ? 1 : 0;
+        const nextFrame = frames[nextFrameIndex];
+        const oldFrame = frames[activeFrame];
+
+        if (push) history.pushState({ page }, "", "#page" + page);
+
+        let ready = preparedFrames.get(nextFrameIndex) === page;
+        if (!ready) {
+            loader.classList.add("show");
+            nextFrame.classList.add("loading");
+            await prepareFrameFor(page, nextFrameIndex);
+            ready = preparedFrames.get(nextFrameIndex) === page;
+        }
+        if (token !== navigationToken || !ready) { navigationLocked = false; return; }
+
+        current = page;
+        nextFrame.classList.remove("loading");
+        nextFrame.style.transition = "none";
+        nextFrame.style.opacity = "0";
+        nextFrame.style.transform = direction > 0 ? "translate3d(0,9%,0) scale(.985)" : "translate3d(0,-9%,0) scale(.985)";
+        nextFrame.style.zIndex = "2";
+        oldFrame.style.zIndex = "1";
+        nextFrame.classList.add("active");
+        void nextFrame.offsetWidth;
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            if (token !== navigationToken) return;
+            const ease = "transform .68s cubic-bezier(.22,1,.36,1), opacity .52s ease";
+            nextFrame.style.transition = ease;
+            oldFrame.style.transition = ease;
+            nextFrame.style.opacity = "1";
+            nextFrame.style.transform = "translate3d(0,0,0) scale(1)";
+            oldFrame.style.opacity = "0";
+            oldFrame.style.transform = direction > 0 ? "translate3d(0,-9%,0) scale(.985)" : "translate3d(0,9%,0) scale(.985)";
+        }));
+
+        await new Promise(resolve => setTimeout(resolve, 700));
+        if (token !== navigationToken) { navigationLocked = false; return; }
+
+        oldFrame.classList.remove("active");
+        oldFrame.style.zIndex = ""; oldFrame.style.opacity = ""; oldFrame.style.transform = ""; oldFrame.style.transition = "";
+        nextFrame.style.zIndex = "2"; nextFrame.style.opacity = "1"; nextFrame.style.transform = "translate3d(0,0,0) scale(1)"; nextFrame.style.transition = "";
+        activeFrame = nextFrameIndex; firstLoad = false; loader.classList.remove("show");
+
+        [current - 1, current + 1].filter(p => p >= 1 && p <= pages.length).forEach((p, i) => {
+            setTimeout(() => { if (token === navigationToken) prepareNext(p); }, 80 + i * 90);
+        });
+        navigationLocked = false;
+    }
+
+    /* =====================================================
+       INITIAL PAGE
+    ===================================================== */
+    const hash = parseInt(location.hash.replace("#page", ""), 10);
+    const initial = Number.isInteger(hash) && hash >= 1 && hash <= pages.length ? hash : 1;
+
+    current = initial;
+    history.replaceState({ page: initial }, "", "#page" + initial);
+
+    frames[0].addEventListener("load", () => {
+        frames[0].classList.add("active");
+        frames[0].style.transform = "translate3d(0, 0, 0) scale(1)";
+        loader.classList.remove("show");
+        firstLoad = false;
+
+        /* Page 2 is prepared immediately. */
+        if (initial < pages.length) {
+            prepareNext(initial + 1);
+        }
+    }, { once: true });
+
+    loader.classList.add("show");
+    frames[0].src = pages[initial - 1];
+
+    /* =====================================================
+       BACK / FORWARD
+    ===================================================== */
+    window.addEventListener("popstate", event => {
+        const page = event.state?.page || 1;
+        go(page, false);
+    });
+
+    /* =====================================================
+       MOBILE / TRACKPAD VERTICAL SWIPE
+       Next = swipe up, Previous = swipe down
+    ===================================================== */
+    let touchStartY = 0;
+    let touchStartX = 0;
+    let touchTracking = false;
+
+    pageShell.addEventListener("touchstart", event => {
+        if (!event.touches.length) return;
+        touchStartY = event.touches[0].clientY;
+        touchStartX = event.touches[0].clientX;
+        touchTracking = true;
+    }, { passive: true });
+
+    pageShell.addEventListener("touchend", event => {
+        if (!touchTracking || !event.changedTouches.length) return;
+        touchTracking = false;
+        const dy = event.changedTouches[0].clientY - touchStartY;
+        const dx = event.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dy) < 55 || Math.abs(dy) < Math.abs(dx)) return;
+        go(current + (dy < 0 ? 1 : -1), true);
+    }, { passive: true });
+
+    /* =====================================================
+       PUBLIC API
+    ===================================================== */
+    window.BirthdayBook = {
+        go,
+        startMusic,
+        playBirthdayMusic,
+        get current() {
+            return current;
+        }
+    };
+})();
+</script>
+</body>
+</html>

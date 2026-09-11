@@ -1,0 +1,255 @@
+/* ================= PAGE-GALLERY ================= */
+/* ==========================
+        RESET
+========================== */
+
+.page-gallery * {
+margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.page-gallery {
+font-family:"Poppins",sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow-x:hidden;
+
+    background:linear-gradient(135deg,#912cf4, #c0c820);
+}
+
+/* ==========================
+      CONTAINER
+========================== */
+
+.page-gallery .container {
+width:100%;
+
+    max-width:1200px;
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    position:relative;
+}
+
+.page-gallery h1 {
+font-family:"Great Vibes",cursive;
+
+    font-size:72px;
+
+    color:#481c4a;
+}
+
+.page-gallery .subtitle {
+font-size:22px;
+
+    color:#121207;
+
+    margin-bottom:35px;
+}
+
+/* ==========================
+      VINTAGE PAPER
+========================== */
+
+.page-gallery .paper {
+width:90%;
+
+    max-width:900px;
+
+    margin:auto;
+
+    background:#c1166c10;
+
+    border:18px solid #e6b0eb;
+
+    border-radius:8px;
+
+    padding:45px;
+
+    box-shadow:
+    0 25px 60px rgba(255, 4, 4, 0.2);
+
+    position:relative;
+}
+
+/* Inner Border */
+
+.page-gallery .paper::before {
+content:"";
+
+    position:absolute;
+
+    inset:18px;
+
+    border:2px solid rgba(204, 45, 56, 0.45);
+
+    pointer-events:none;
+}
+
+/* ==========================
+      PHOTO
+========================== */
+
+.page-gallery .photo {
+width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:35px;
+}
+
+.page-gallery .photo img {
+width:100%;
+
+    max-width:520px;
+
+    height:650px;
+
+    object-fit:cover;
+
+    border:10px solid #c273c2;
+
+    box-shadow:0 15px 35px rgba(251, 4, 4, 0.2);
+}
+
+/* ==========================
+      MESSAGE
+========================== */
+
+.page-gallery .message h6{
+font-family:"Great Vibes",cursive;
+
+    font-size:48px;
+
+    color:#431548;
+
+    margin-bottom:20px;
+}
+
+.page-gallery .message p {
+font-size:22px;
+
+    line-height:1.9;
+
+    color:#5c3052;
+}
+
+/* ==========================
+      BUTTON
+========================== */
+
+.page-gallery #nextBtn {
+margin-top:40px;
+
+    padding:16px 45px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:#d86bff60;
+
+    color:#240101;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.page-gallery #nextBtn:hover {
+transform:scale(1.05);
+
+    background:#ff4f6d;
+}
+
+/* ==========================
+      MOBILE
+========================== */
+
+@media(max-width:768px) {
+.page-gallery h1 {
+font-size:48px;
+}
+
+.page-gallery .subtitle {
+font-size:18px;
+}
+
+.page-gallery .paper {
+padding:20px;
+
+border-width:12px;
+
+width:95%;
+}
+
+.page-gallery .photo img {
+height:360px;
+}
+
+.page-gallery .message h2 {
+font-size:34px;
+}
+
+.page-gallery .message p {
+font-size:17px;
+
+line-height:1.8;
+}
+
+.page-gallery #nextBtn {
+width:100%;
+}
+}
+
+/* ==========================
+      HEARTS
+========================== */
+
+.page-gallery .heart {
+position:fixed;
+
+bottom:-30px;
+
+pointer-events:none;
+
+animation:heartFloat 6s linear forwards;
+}
+
+@keyframes heartFloat {
+0%{
+
+transform:translateY(0);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) rotate(360deg);
+
+opacity:0;
+
+}
+}

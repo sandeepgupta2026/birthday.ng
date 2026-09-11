@@ -1,0 +1,110 @@
+
+/* =========================================================
+   FINAL RESPONSIVE OVERRIDES
+   Mobile + tablet + laptop/desktop
+   Keeps the original visual design and animations.
+   ========================================================= */
+html, body { max-width:100%; }
+img, canvas, video { max-width:100%; }
+
+@media (max-width: 900px) {
+  .page-message .scrapbook { padding: 32px 14px; }
+  .page-message .scrapbook h1 { font-size: clamp(42px, 8vw, 60px); }
+  .page-message .subtitle { font-size: clamp(15px, 2.5vw, 20px); margin-bottom:24px; }
+  .page-message .board { height:auto; min-height:0; padding:24px 14px 30px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px 18px; overflow:visible; }
+  .page-message .board::before { inset:10px; }
+  .page-message .card,
+  .page-message .card1,
+  .page-message .card2,
+  .page-message .card3,
+  .page-message .card4,
+  .page-message .center {
+    position:relative;
+    top:auto; right:auto; bottom:auto; left:auto;
+    width:100%;
+    max-width:280px;
+    margin:0 auto;
+    transform:none;
+    grid-column:auto;
+  }
+  .page-message .card img { height:auto; aspect-ratio:4/4.5; }
+  .page-message .center { grid-column:1 / -1; width:min(100%,300px); }
+  .page-message .center img { height:auto; aspect-ratio:4/4.8; }
+  .page-message .letter { width:min(100%,700px); margin:28px auto 10px; padding:26px 20px; }
+  .page-message .letter h2 { font-size:clamp(30px,7vw,40px); }
+  .page-message .letter p { font-size:clamp(15px,2.4vw,19px); line-height:1.7; }
+  .page-message #nextBtn { margin:24px auto 4px; padding:14px 38px; }
+
+  .page-portrait { overflow-y:auto; align-items:flex-start; }
+  .page-portrait .container { min-height:100%; padding:24px 16px 40px; }
+  .page-portrait h1 { margin-top:20px; font-size:clamp(44px,9vw,68px); }
+  .page-portrait .content { margin-top:25px; gap:28px; flex-direction:column; }
+  .page-portrait .photoBox { width:100%; }
+  .page-portrait .polaroid { width:min(82vw,330px); padding:12px 12px 42px; }
+  .page-portrait .polaroid img { height:auto; aspect-ratio:3/4; }
+  .page-portrait .messageBox { width:min(100%,520px); text-align:center; }
+  .page-portrait .messageBox h2 { font-size:clamp(28px,7vw,40px); }
+  .page-portrait .messageBox p { font-size:clamp(16px,3.8vw,20px); line-height:1.7; }
+  .page-portrait #nextBtn { margin-top:20px; }
+
+  .page-gallery { overflow-y:auto; align-items:flex-start; }
+  .page-gallery .container { padding:28px 12px 40px; }
+  .page-gallery h1 { font-size:clamp(46px,10vw,72px); }
+  .page-gallery .subtitle { font-size:clamp(15px,3.5vw,22px); margin-bottom:20px; }
+  .page-gallery .paper { width:100%; max-width:900px; padding:clamp(16px,4vw,45px); border-width:clamp(8px,2.5vw,18px); }
+  .page-gallery .paper::before { inset:10px; }
+  .page-gallery .photo img { width:min(100%,520px); height:auto; aspect-ratio:4/5; }
+  .page-gallery .message h6 { font-size:clamp(34px,7vw,48px); }
+  .page-gallery .message p { font-size:clamp(16px,3.5vw,22px); line-height:1.7; }
+  .page-gallery #nextBtn { width:min(100%,320px); margin-top:24px; }
+
+  .page-letter { min-height:100%; height:auto; overflow-y:auto; padding:12px 8px 28px; align-items:flex-start; }
+  .page-letter .wrapper { min-height:100%; align-items:flex-start; }
+  .page-letter .letter { width:100%; min-height:100%; padding:82px clamp(28px,7vw,60px) 70px; }
+  .page-letter h1 { font-size:clamp(48px,12vw,68px); margin-bottom:24px; }
+  .page-letter #typing { font-size:clamp(21px,5vw,28px); line-height:1.5; overflow-wrap:anywhere; }
+  .page-letter #nextBtn { max-width:100%; font-size:clamp(24px,6vw,29px); padding:12px 24px; }
+
+  .page-final #openingSection h2 { font-size:clamp(20px,5vw,32px); letter-spacing:2px; text-align:center; }
+  .page-final #openingSection h1 { font-size:clamp(48px,12vw,85px); text-align:center; padding:0 12px; }
+  .page-final #giftSection h1 { font-size:clamp(36px,9vw,68px); text-align:center; padding:0 15px; }
+  .page-final #gift { width:min(52vw,240px); height:min(52vw,240px); margin:38px 0; }
+  .page-final #gift .box { height:70%; }
+  .page-final .bow { font-size:clamp(42px,12vw,58px); }
+  .page-final .ribbonVertical { width:max(10px,4vw); }
+  .page-final .ribbonHorizontal { height:max(10px,4vw); }
+  .page-final #openGift { max-width:90vw; font-size:clamp(16px,4vw,20px); padding:14px 28px; }
+  .page-final #heartSection h2 { font-size:clamp(30px,9vw,58px); text-align:center; padding:0 12px; }
+  .page-final #nameCanvas { width:100vw; height:100vh; }
+}
+
+@media (max-width: 520px) {
+  .page-message .board { grid-template-columns:1fr; gap:22px; padding:22px 12px 26px; }
+  .page-message .center { grid-column:auto; }
+  .page-message .card { max-width:310px; }
+  .page-message .card img { aspect-ratio:1/1.08; }
+  .page-message .flower { font-size:25px; }
+  .page-message .flower1 { left:8px; top:18px; }
+  .page-message .flower2 { right:8px; top:70px; }
+
+  .page-welcome .container { width:calc(100% - 28px); padding:28px 16px; border-radius:20px; }
+  .page-welcome h1 { font-size:clamp(36px,11vw,48px); }
+  .page-welcome h2 { font-size:clamp(20px,6vw,28px); }
+  .page-welcome h3 { font-size:clamp(24px,7vw,32px); }
+  .page-welcome p { font-size:15px; line-height:1.6; }
+  .page-welcome button { padding:14px 32px; }
+
+  .page-portrait .polaroid { width:min(78vw,290px); }
+  .page-portrait .container { padding-left:12px; padding-right:12px; }
+
+  .page-gallery .paper { border-width:7px; padding:14px; }
+  .page-gallery .photo img { border-width:6px; }
+
+  .page-letter .letter { padding:72px 24px 65px; }
+  .page-letter .letter::before { width:72%; height:42%; }
+  .page-letter .letter::after { width:74%; height:30%; }
+
+  .page-final #gift { width:170px; height:170px; }
+  .page-final .box { height:118px; }
+  .page-final #openingSection h1 { line-height:1.05; }
+}

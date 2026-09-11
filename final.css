@@ -1,0 +1,334 @@
+/* =========================================================
+   BIRTHDAY FINAL PAGE
+   Responsive target: 360 x 800 and larger screens
+   ========================================================= */
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html, body {
+    width:100%;
+    height:100%;
+    min-height:100%;
+    overflow:hidden;
+    background:#000;
+}
+
+body.page-final {
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Poppins",sans-serif;
+    color:#fff;
+    background:#000;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.page-final section {
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    overflow:hidden;
+}
+
+#sky {
+    position:fixed;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(24,20,60,.20), transparent 48%),
+        #000;
+}
+
+#stars, #clouds {
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+
+.star {
+    position:absolute;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 5px rgba(255,255,255,.8), 0 0 10px rgba(80,160,255,.55);
+}
+
+.cloud {
+    position:absolute;
+    width:260px;
+    height:70px;
+    border-radius:50px;
+    background:rgba(255,255,255,.035);
+    filter:blur(25px);
+    animation:moveCloud linear infinite;
+}
+
+@keyframes moveCloud {
+    from { transform:translateX(-350px); }
+    to   { transform:translateX(calc(100vw + 350px)); }
+}
+
+#canvas {
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:5;
+}
+
+#openingSection {
+    z-index:10;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(3px);
+}
+
+#openingSection h2 {
+    font-size:32px;
+    color:#ffd54f;
+    letter-spacing:4px;
+    margin-bottom:20px;
+}
+
+#openingSection h1 {
+    font-family:"Great Vibes",cursive;
+    font-size:85px;
+    line-height:1;
+    color:#fff;
+    text-shadow:0 0 20px #ff4da6,0 0 40px #ff4da6,0 0 80px #ff4da6;
+    animation:titleGlow 2s infinite alternate;
+    padding:0 15px;
+}
+
+@keyframes titleGlow {
+    from { transform:scale(1); }
+    to   { transform:scale(1.05); }
+}
+
+#giftSection { z-index:10; display:none; }
+
+#giftSection h1 {
+    font-size:68px;
+    font-family:"Great Vibes",cursive;
+    color:#FFD54F;
+    text-shadow:0 0 20px gold,0 0 50px orange;
+    padding:0 15px;
+}
+
+#giftSection p {
+    margin-top:15px;
+    font-size:22px;
+}
+
+#gift {
+    position:relative;
+    width:240px;
+    height:240px;
+    margin:60px 0;
+    animation:giftFloat 3s ease-in-out infinite;
+}
+
+.box {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:170px;
+    border-radius:0 0 20px 20px;
+    background:linear-gradient(180deg,#ff5b99,#d81b60);
+    box-shadow:0 25px 50px rgba(240,237,237,.25);
+}
+
+.lid {
+    position:absolute;
+    width:100%;
+    height:72px;
+    border-radius:20px;
+    background:linear-gradient(#ff84b4,#ff4f92);
+    transform-origin:bottom center;
+    z-index:5;
+}
+
+.ribbonVertical {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width:18px;
+    height:100%;
+    background:gold;
+}
+
+.ribbonHorizontal {
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:100%;
+    height:18px;
+    background:gold;
+}
+
+.bow {
+    position:absolute;
+    left:50%;
+    top:-25px;
+    transform:translateX(-50%);
+    font-size:58px;
+}
+
+.magicLight {
+    position:absolute;
+    left:50%;
+    bottom:65px;
+    transform:translateX(-50%);
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:gold;
+    filter:blur(40px);
+    opacity:.25;
+}
+
+#openGift {
+    border:0;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:20px;
+    font-weight:600;
+    color:#fff;
+    background:linear-gradient(45deg,#ff006e,#ffbe0b);
+    box-shadow:0 0 20px #ff006e;
+    padding:18px 48px;
+    touch-action:manipulation;
+}
+
+#openGift:active { transform:scale(.96); }
+
+@keyframes giftFloat {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-15px); }
+}
+
+#heartSection { z-index:10; display:none; }
+
+#nameSection {
+    z-index:15;
+    display:none;
+    background:transparent;
+}
+
+#nameCanvas {
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+#dotFinalSection {
+    z-index:20;
+    display:none;
+    background:transparent !important;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+#dotFinalCanvas {
+    display:block;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+}
+
+.fadeIn { animation:fadeIn 1.2s ease forwards; }
+
+@keyframes fadeIn {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+
+/* =========================
+   MOBILE: 360 x 800
+   ========================= */
+
+@media (max-width:600px) {
+
+    #openingSection {
+        padding:0 16px;
+    }
+
+    #openingSection h2 {
+        font-size:clamp(19px,5.8vw,26px);
+        letter-spacing:2px;
+        margin-bottom:14px;
+    }
+
+    #openingSection h1 {
+        width:100%;
+        font-size:clamp(46px,14vw,58px);
+        line-height:1.02;
+        padding:0 8px;
+    }
+
+    #giftSection {
+        padding:20px 12px;
+    }
+
+    #giftSection h1 {
+        width:100%;
+        font-size:clamp(34px,10vw,44px);
+        line-height:1.05;
+        padding:0 8px;
+    }
+
+    #giftSection p {
+        margin-top:8px;
+        font-size:18px;
+    }
+
+    #gift {
+        width:170px;
+        height:170px;
+        margin:35px 0 30px;
+    }
+
+    .box { height:118px; border-radius:0 0 15px 15px; }
+    .lid { height:52px; border-radius:15px; }
+    .bow { top:-21px; font-size:43px; }
+    .ribbonVertical { width:11px; }
+    .ribbonHorizontal { height:11px; }
+    .magicLight { width:50px; height:50px; bottom:45px; filter:blur(28px); }
+
+    #openGift {
+        width:min(88vw,280px);
+        padding:14px 20px;
+        font-size:17px;
+    }
+
+    #heartSection { padding:0 10px; }
+
+    /* Prevent old heart geometry from becoming wider than the phone. */
+    #heartSection h2 {
+        font-size:40px;
+    }
+}
+
+/* Very narrow phones */
+@media (max-width:380px) {
+    #openingSection h1 { font-size:50px; }
+    #giftSection h1 { font-size:37px; }
+    #gift { width:155px; height:155px; margin:30px 0 25px; }
+    .box { height:108px; }
+    #openGift { font-size:16px; }
+}
+
+/* Landscape phones: keep everything inside the viewport */
+@media (max-width:600px) and (max-height:500px) {
+    #gift { transform:scale(.72); margin:0; }
+    #giftSection h1 { font-size:32px; }
+    #openGift { padding:10px 20px; }
+}

@@ -1,0 +1,157 @@
+/* =========================================================
+   SMOOTH BIRTHDAY PAGE SHELL
+   ========================================================= */
+
+:root {
+    color-scheme: dark;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+body {
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+#pageShell {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    isolation: isolate;
+}
+
+.birthdayFrame {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: #000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 18px, 0) scale(.995);
+    transition:
+        opacity .42s cubic-bezier(.22, 1, .36, 1),
+        transform .42s cubic-bezier(.22, 1, .36, 1),
+        visibility 0s linear .42s;
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.birthdayFrame.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+        opacity .42s cubic-bezier(.22, 1, .36, 1),
+        transform .42s cubic-bezier(.22, 1, .36, 1),
+        visibility 0s;
+    z-index: 2;
+}
+
+.birthdayFrame.loading {
+    z-index: 3;
+}
+
+#pageLoader {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, .08);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .16s ease, visibility .16s ease;
+}
+
+#pageLoader.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#pageLoader span {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, .18);
+    border-top-color: rgba(255, 255, 255, .9);
+    animation: pageLoaderSpin .7s linear infinite;
+}
+
+@keyframes pageLoaderSpin {
+    to { transform: rotate(360deg); }
+}
+
+#musicBtn {
+    position: fixed;
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+    z-index: 99999;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .45);
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, .25);
+    transition: transform .2s ease, background .2s ease;
+    touch-action: manipulation;
+}
+
+#musicBtn:hover {
+    transform: scale(1.06);
+    background: rgba(0, 0, 0, .6);
+}
+
+#musicBtn:active {
+    transform: scale(.94);
+}
+
+@media (max-width: 600px) {
+    .birthdayFrame {
+        transform: translate3d(0, 12px, 0) scale(.998);
+    }
+
+    #musicBtn {
+        width: 40px;
+        height: 40px;
+        right: max(10px, env(safe-area-inset-right));
+        bottom: max(10px, env(safe-area-inset-bottom));
+        font-size: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .birthdayFrame,
+    .birthdayFrame.active,
+    #pageLoader,
+    #musicBtn {
+        transition: none;
+    }
+}
+\n\n/* PROJECT 1 — CINEMATIC SLIDE TRANSITION */\n#pageShell{perspective:none;overflow:hidden;isolation:isolate}\n.birthdayFrame{opacity:0;visibility:hidden;pointer-events:none;transform:translate3d(0,9%,0) scale(.985);transform-origin:center center;transition:transform .68s cubic-bezier(.22,1,.36,1),opacity .52s ease,visibility 0s linear .68s;will-change:transform,opacity;backface-visibility:hidden;-webkit-backface-visibility:hidden}\n.birthdayFrame.active{opacity:1;visibility:visible;pointer-events:auto;transform:translate3d(0,0,0) scale(1);z-index:2;transition:transform .68s cubic-bezier(.22,1,.36,1),opacity .52s ease,visibility 0s}\n.birthdayFrame.loading{z-index:3}\n#pageLoader{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}\n#pageLoader span{width:16px;height:16px;border-width:2px}\n@media(max-width:600px){.birthdayFrame{transform:translate3d(9%,0,0) scale(.99);transition:transform .58s cubic-bezier(.22,1,.36,1),opacity .44s ease,visibility 0s .58s}.birthdayFrame.active{transform:translate3d(0,0,0) scale(1);transition:transform .58s cubic-bezier(.22,1,.36,1),opacity .44s ease,visibility 0s}}\n@media(prefers-reduced-motion:reduce){.birthdayFrame,.birthdayFrame.active{transition:opacity .2s ease!important;transform:none!important}}\n
